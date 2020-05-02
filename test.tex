@@ -1,7 +1,4 @@
 \documentclass{article}
-\usepackage         {luatexbase}
-\RequireLuaModule   {lualibs}
-\usepackage         {luaotfload} %% recommended, in that order!
 \usepackage{luapackageloader}
 \usepackage{luacode}
 \usepackage{longtable}
@@ -9,7 +6,7 @@
 \author{ }
 \date{April 2020}
 
-\directlua{nb = require("netbox")}
+\luadirect{nb = require("netbox")}
 
 \newcommand\settoken[1]{\directlua{nb.settoken(\luastring{#1})}}
 
@@ -23,7 +20,7 @@
 \section{Introduction}
 
 \settoken{}
-\dumptable{https://netbox.example.com/api/dcim/devices}{{ {"device-role" ,{"name"} }  ,"serial" }}
+\dumptable{https://netbox.example.com/api/dcim/devices}{{ {"device_role" ,{"name"} }  ,"serial" }}
 
 
 \end{document}
