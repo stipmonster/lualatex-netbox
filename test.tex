@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage         {luatexbase}
+\RequireLuaModule   {lualibs}
+\usepackage         {luaotfload} %% recommended, in that order!
+\usepackage{luapackageloader}
+\usepackage{luacode}
+\usepackage{longtable}
+\title{lualatex}
+\author{ }
+\date{April 2020}
+
+\directlua{nb = require("netbox")}
+
+\newcommand\settoken[1]{\directlua{nb.settoken(\luastring{#1})}}
+
+\newcommand\dumptable[2]{\directlua{nb.table(\luastring{#1},#2)}}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\settoken{}
+\dumptable{https://netbox.example.com/api/dcim/devices}{{ {"device-role" ,{"name"} }  ,"serial" }}
+
+
+\end{document}
+
