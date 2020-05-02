@@ -37,6 +37,25 @@ function call_api(token,url)
   return nil
 end
 
+
+local function print_array(row)
+  for k,v in pairs(row) do
+    if k == #row then
+      tex.write(v)
+      texio.write(v)
+    else
+      tex.write(v)
+      texio.write(v)
+      texio.write(" & ")
+      tex.sprint(" & ")
+    end
+
+  end
+  tex.print(" \\\\")
+  print(" \\\\")
+end
+
+
 local function print_row(index, json_result)
   local row = {}
 
@@ -53,22 +72,9 @@ local function print_row(index, json_result)
   end
   iter_db(index, json_result)
 
-
-  for k,v in pairs(row) do
-    if k == #row then
-      tex.sprint(v)
-      texio.write(v)
-    else
-      tex.sprint(v)
-      texio.write(v)
-      texio.write(" & ")
-      tex.sprint(" & ")
-    end
-
-  end
-  tex.print(" \\\\")
-  print(" \\\\")
+  print_array(row)
   --- tex.print(table.concat(row, " & ") .." \\\\")
+
   texio.write(table.concat(row, " & ") .." \\\\\n")
 end
 
@@ -92,8 +98,8 @@ local header = {}
   end
   tex.print("\\begin{longtable}{"..table.concat(tex_header,"|").."}")
 
-  texio.write(table.concat(header, " & ") .." \\\\\n")
-  tex.print(table.concat(header, " & ") .." \\\\")
+  print_array(header)
+
   tex.print("\\hline")
 end
 
